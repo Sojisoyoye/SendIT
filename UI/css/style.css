@@ -31,7 +31,7 @@ header {
 header a {
     color: #fff;
     text-decoration: none;
-    text-transform: uppercase;
+    /*text-transform: lowercase; */
     font-size: 13px;
 }
 
@@ -55,3 +55,15 @@ header nav {
     float: right;
    /* margin-top: 20px; */
 }
+
+header .highlight, header .current a {
+    color: black;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: #ccc; 
+    font-weight: bold;
+}
+
+/* Showcase */
