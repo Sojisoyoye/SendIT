@@ -364,6 +364,55 @@ header nav ul li a {
     line-height: 35px;
     color: #ffffff;
 }
+
+/* DASHBOARD */
+
+.wrapper {
+    width: 250px;
+    margin: 0 auto;
+} 
+
+.dashboard-home {
+    overflow: hidden;
+}
+
+.dashboard-home h2 {
+    font-family: 'Open Sans';
+    font-size: 16px;
+    font-weight: 600;
+    color: #111;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dashboard-home p {
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-weight: 500;
+    color: #111;
+    text-align: center;
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 19px;
+}
+
+.dashboard-home .option {
+    float: left;
+    width: 80px;
+    height: 80px;
+    margin: 20px 20px 0;
+    background-color: #e3e3e3; 
+}
+
+.dashboard-home .option p {
+    padding-top: 20%;
+    font-family: 'Open Sans';
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+    text-align: center;
+}
+
 footer {
     padding: 10px;
     margin-top: 10px;
