@@ -112,6 +112,11 @@ em {
     color: #039be5;
 }
 
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
 
 body {
     font-family: 'Open Sans', sans-serif;
@@ -120,8 +125,17 @@ body {
     padding: 0;
     margin: 0;
     background-color: #ffffff;
-    height: 100%
+    height: 100%;
+    min-height: 100%;
+    position: relative; 
 }
+
+/*main {
+    padding: 10px;
+    padding-bottom: 10px;
+    margin-top: 100px;
+    overflow: hidden;
+} */
 
 /* Global */
 .container {
@@ -505,13 +519,15 @@ select {
 
 footer {
     padding: 10px;
-    margin-top: 10px; 
-    margin-bottom: none;
+    margin-top: 10px;
     color: #ffffff;
     background: #3c3c3c;
     text-align: center;
     font-size: 10px;
     letter-spacing: 1px;
-    cursor: pointer;
-    overflow: hidden;
+    overflow: hidden; 
+    /*position: absolute; */
+    bottom: 0;
+    width: 100%;
+    height: 10px;
 }
