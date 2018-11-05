@@ -4,7 +4,7 @@
   "description": "An app to manage parcel delivery order",
   "main": "app.js",
   "scripts": {
-    "test": "mocha --require babel-register test/*.js"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
