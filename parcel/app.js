@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import db from './db/db';
+import db1 from './db/db1';
 // Set up the express app
 const app = express();
 
@@ -16,6 +17,34 @@ app.get('/api/v1/parcels', (req, res) => {
     parcels: db
   })
 });
+
+//get all parcels by all users
+app.get('/api/v1/users', (req, res) => {
+    res.status(200).send({
+       success: 'true',
+       message: 'users parcels retreived successfully',
+       parcels: db1
+    })
+});
+
+// get all parcel by a specific specific
+app.get('/api/v1/users/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10);
+    db1.map((user) => {
+      if (user.id === id) {
+        return res.status(200).send({
+          success: 'true',
+          message: 'user parcels retrieved successfully',
+          user,
+        });
+    }
+});
+return res.status(404).send({
+  success: 'false',
+  message: 'user does not exist',
+});
+});
+
 
 // create parcel
 app.post('/api/v1/parcels', (req, res) => {
