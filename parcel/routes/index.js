@@ -1,225 +1,28 @@
 import express from 'express';
-import db from '../db/db';
-import db1 from '../db/db1';
+import parcelController from '../parcelsControllers/parcels.js';
+
+//import db from '../db/db';
+//import db1 from '../db/db1';
 
 const router = express.Router();
 
 // get all to parcels
-router.get('/api/v1/parcels', (req, res) => {
-    res.status(200).send({
-      success: 'true',
-      message: 'parcels retrieved successfully',
-      parcels: db
-    })
-  });
+router.get('/api/v1/parcels', parcelController.getAllParcels);
   
-  //get all parcels by all users
-  router.get('/api/v1/users', (req, res) => {
-      res.status(200).send({
-         success: 'true',
-         message: 'users parcels retreived successfully',
-         parcels: db1
-      })
-  });
+//get all parcels by all users
+router.get('/api/v1/users', parcelController.getAllUsersParcels);
   
-  // get all parcel by a specific specific
-  router.get('/api/v1/users/:id', (req, res) => {
-      const id = parseInt(req.params.id, 10);
-      db1.map((user) => {
-        if (user.id === id) {
-          return res.status(200).send({
-            success: 'true',
-            message: 'user parcels retrieved successfully',
-            user,
-          });
-      }
-  });
-  return res.status(404).send({
-    success: 'false',
-    message: 'user does not exist',
-  });
-  });
+// get all parcel by a specific user
+router.get('/api/v1/users/:id', parcelController.getAllSpecificUserParcels);
+// create parcel
+router.post('/api/v1/parcels', parcelController.createParcel);
+// get a specific parcel
+router.get('/api/v1/parcels/:id', parcelController.getSpecificParcel);
   
-  
-  // create parcel
-  router.post('/api/v1/parcels', (req, res) => {
-      if(!req.body.userid) {
-          return res.status(400).send({
-          success: 'false',
-          message: 'userid is required'
-        });
-      } else if(!req.body.sendername) {
-          return res.status(400).send({
-          success: 'false',
-          message: 'sendername is required'
-        });
-      } else if(!req.body.receivername) {
-          return res.status(400).send({
-          success: 'false',
-          message: 'receivername is required'    
-          });  
-      } else if(!req.body.pickuplocation) {
-        return res.status(400).send({
-        success: 'false',
-        message: 'pickuplocation is required'    
-        });
-      } else if(!req.body.destination) {
-        return res.status(400).send({
-        success: 'false',
-        message: 'destination is required'    
-        });  
-      } else if(!req.body.packagecontent) {
-        return res.status(400).send({
-        success: 'false',
-        message: 'packagecontent is required'    
-        });
-      } else if(!req.body.weight) {
-        return res.status(400).send({
-        success: 'false',
-        message: 'weight is required'    
-        });
-      } else if(!req.body.price) {
-        return res.status(400).send({
-        success: 'false',
-        message: 'price is required'
-        });
-      }
-  
-     const parcel = {
-       id: db.length + 1,
-       userid: req.body.userid,
-       sendername: req.body.sendername,
-       receivername: req.body.receivername,
-       pickuplocation: req.body.pickuplocation,
-       destination: req.body.destination,
-       packagecontent: req.body.packagecontent,
-       weight: req.body.weight,
-       price: req.body.price
-     }
-     db.push(parcel);
-   return res.status(201).send({
-     success: 'true',
-     message: 'parcel added successfully',
-     parcel
-   })
-  });
-  
-  // get a specific parcel
-  router.get('/api/v1/parcels/:id', (req, res) => {
-      const id = parseInt(req.params.id, 10);
-      db.map((parcel) => {
-        if (parcel.id === id) {
-          return res.status(200).send({
-            success: 'true',
-            message: 'parcel retrieved successfully',
-            parcel,
-          });
-      }
-  });
-  return res.status(404).send({
-    success: 'false',
-    message: 'parcel does not exist',
-  });
-  });
-  
-  // cancel a specific parcel
-  router.delete('/api/v1/parcels/:id', (req, res) => {
-      const id = parseInt(req.params.id, 10);
-      db.map((parcel, index) => {
-        if (parcel.id === id) {
-           db.splice(index, 1);
-           return res.status(200).send({
-             success: 'true',
-             message: 'Parcel deleted successfuly',
-           });
-        }
-      });
-      return res.status(404).send({
-          success: 'false',
-          message: 'Parcel not found',
-        });
-    });
-  
-    // update a specific parcel
-    router.put('/api/v1/parcels/:id', (req, res) => {
-      const id = parseInt(req.params.id, 10);
-      let parcelFound;
-      let itemIndex;
-      db.map((parcel, index) => {
-        if (parcel.id === id) {
-          parcelFound = parcel;
-          itemIndex = index;
-        }
-      });
-    
-      if (!parcelFound) {
-        return res.status(404).send({
-          success: 'false',
-          message: 'parcel not found',
-        });
-      }
-      if (!req.body.userid) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'userid is required',
-          });
-        } else if (!req.body.sendername) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'sendername is required',
-          });
-        } else if (!req.body.receivername) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'receivername is required',
-          });
-        } else if (!req.body.pickuplocation) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'pickuplocation is required',
-          });
-        } else if (!req.body.destination) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'destination is required',
-          });
-        } else if (!req.body.packagecontent) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'packagecontent is required',
-          });
-        } else if (!req.body.weight) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'weight is required',
-          });
-        } else if (!req.body.price) {
-          return res.status(400).send({
-            success: 'false',
-            message: 'price is required',
-          });
-        } 
-      
-        const updatedParcel = {
-          id: parcelFound.id,
-          userid: req.body.userid || parcelFound.userid,
-          sendername: req.body.sendername || parcelFound.sendername,
-          receivername: req.body.receivername || parcelFound.receivername,
-          pickuplocation: req.body.pickuplocation || parcelFound.pickuplocation,
-          destination: req.body.destination || parcelFound.destination,
-          packagecontent: req.body.packagecontent || parcelFound.packagecontent,
-          weight: req.body.weight || parcelFound.weight,
-          price: req.body.price || parcelFound.price,
-        };
-      
-        db.splice(itemIndex, 1, updatedParcel)
-      
-        return res.status(201).send({
-          success: 'true',
-          message: 'Parcel added successfully',
-          updatedParcel,
-      });
-  });
+// cancel a specific parcel
+router.delete('/api/v1/parcels/:id', parcelController.cancelParcel);
 
-  export default router;
-  
+// update a specific parcel
+router.put('/api/v1/parcels/:id', parcelController.updateParcel);
+
+export default router;
