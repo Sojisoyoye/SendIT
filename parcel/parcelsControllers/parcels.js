@@ -63,32 +63,32 @@ class ParcelsController {
         success: 'false',
         message: 'sendername is required'
       });
-    } else if(!req.body.receivername) {
+    } if (!req.body.receivername) {
         return res.status(400).send({
         success: 'false',
         message: 'receivername is required'    
         });  
-    } else if(!req.body.pickuplocation) {
+    } else if (!req.body.pickuplocation) {
       return res.status(400).send({
       success: 'false',
       message: 'pickuplocation is required'    
       });
-    } else if(!req.body.destination) {
+    } else if (!req.body.destination) {
       return res.status(400).send({
       success: 'false',
       message: 'destination is required'    
       });  
-    } else if(!req.body.packagecontent) {
+    } else if (!req.body.packagecontent) {
       return res.status(400).send({
       success: 'false',
       message: 'packagecontent is required'    
       });
-    } else if(!req.body.weight) {
+    } else if (!req.body.weight) {
       return res.status(400).send({
       success: 'false',
       message: 'weight is required'    
       });
-    } else if(!req.body.price) {
+    } else if (!req.body.price) {
       return res.status(400).send({
       success: 'false',
       message: 'price is required'
@@ -159,7 +159,7 @@ class ParcelsController {
           success: 'false',
           message: 'sendername is required',
         });
-    } else if (!req.body.receivername) {
+    } if (!req.body.receivername) {
         return res.status(400).send({
           success: 'false',
           message: 'receivername is required',
