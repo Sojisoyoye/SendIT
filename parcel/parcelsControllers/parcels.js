@@ -12,9 +12,9 @@ class ParcelsController {
 
   getAllUsersParcels(req, res) {
     return res.status(200).send({
-       success: 'true',
-       message: 'users parcels retreived successfully',
-       parcels: db1
+      success: 'true',
+      message: 'users parcels retreived successfully',
+      parcels: db1,
     });
   }
 
@@ -28,11 +28,11 @@ class ParcelsController {
           user,
         });
       }
-   });
-   return res.status(404).send({
-       success: 'false',
-       message: 'user does not exist',
-   });
+    });
+    return res.status(404).send({
+      success: 'false',
+      message: 'user does not exist',
+    });
   }
 
   getSpecificParcel(req, res) {
@@ -47,9 +47,9 @@ class ParcelsController {
       }
     });
     return res.status(404).send({
-        success: 'false',
-        message: 'Parcel does not exist',
-      });
+      success: 'false',
+      message: 'Parcel does not exist',
+    });
   }
 
   createParcel(req, res) {
@@ -58,7 +58,7 @@ class ParcelsController {
         success: 'false',
         message: 'userid is required'
       });
-    } else if(!req.body.sendername) {
+    } if(!req.body.sendername) {
         return res.status(400).send({
         success: 'false',
         message: 'sendername is required'
@@ -114,22 +114,21 @@ class ParcelsController {
    });
   }
 
- 
 
   cancelParcel(req, res) {
     const id = parseInt(req.params.id, 10);
     db.map((parcel, index) => {
       if (parcel.id === id) {
-         db.splice(index, 1);
-         return res.status(200).send({
-           success: 'true',
-           message: 'Parcel deleted successfuly',
-         });
+        db.splice(index, 1);
+        return res.status(200).send({
+          success: 'true',
+          message: 'Parcel deleted successfuly',
+        });
       }
     });
     return res.status(404).send({
-        success: 'false',
-        message: 'Parcel not found',
+      success: 'false',
+      message: 'Parcel not found',
     });
   }
 
@@ -155,7 +154,7 @@ class ParcelsController {
           success: 'false',
           message: 'userid is required',
         });
-    } else if (!req.body.sendername) {
+    } if (!req.body.sendername) {
         return res.status(400).send({
           success: 'false',
           message: 'sendername is required',
