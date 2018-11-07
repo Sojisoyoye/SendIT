@@ -35,6 +35,23 @@ class ParcelsController {
    });
   }
 
+  getSpecificParcel(req, res) {
+    const id = parseInt(req.params.id, 10);
+    db.map((parcel) => {
+      if (parcel.id === id) {
+        return res.status(200).send({
+          success: 'true',
+          message: 'Parcel retrieved successfully',
+          parcel,
+        });
+      }
+    });
+    return res.status(404).send({
+        success: 'false',
+        message: 'Parcel does not exist',
+      });
+  }
+
   createParcel(req, res) {
     if(!req.body.userid) {
         return res.status(400).send({
@@ -97,22 +114,7 @@ class ParcelsController {
    });
   }
 
-  getSpecificParcel(req, res) {
-    const id = parseInt(req.params.id, 10);
-    db.map((parcel) => {
-      if (parcel.id === id) {
-        return res.status(200).send({
-          success: 'true',
-          message: 'Parcel retrieved successfully',
-          parcel,
-        });
-      }
-    });
-    return res.status(404).send({
-        success: 'false',
-        message: 'Parcel does not exist',
-      });
-  }
+ 
 
   cancelParcel(req, res) {
     const id = parseInt(req.params.id, 10);
