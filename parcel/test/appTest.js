@@ -35,7 +35,7 @@ describe('Parcels', () => {
       chai.request(app)
         .get('/api/v1/users/${id}')
         .end((err, res) => {
-          // res.should.have.status(200);
+          res.should.have.status(200);
           res.body.should.be.a('object');
           done();
         });
@@ -56,7 +56,7 @@ describe('Parcels', () => {
       chai.request(app)
         .get('/api/v1/parcels/${id}')
         .end((err, res) => {
-          // res.should.have.status(200);
+          res.should.have.status(200);
           res.body.should.be.a('object');
           done();
         });
@@ -106,7 +106,6 @@ describe('Parcels', () => {
 
   describe('Delete a Parcel', () => {
     it('should cancel a specific parcel', (done) => {
-      // const id = 1;
       chai.request(app)
         .get('/api/v1/parcels/')
         .end((err, res) => {
