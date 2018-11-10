@@ -1,4 +1,5 @@
 /* eslint-disable class-methods-use-this */
+/* eslint consistent-return: "error" */
 import db from '../db/db';
 import db1 from '../db/db1';
 
@@ -106,7 +107,7 @@ class ParcelsController {
       packagecontent: req.body.packagecontent,
       weight: req.body.weight,
       price: req.body.price,
-    }
+    };
     db.push(parcel);
     return res.status(201).send({
       success: 'true',
@@ -204,8 +205,7 @@ class ParcelsController {
       price: req.body.price || parcelFound.price,
     };
 
-    db.splice(itemIndex, 1, updatedParcel)
-
+    db.splice(itemIndex, 1, updatedParcel);
     return res.status(201).send({
       success: 'true',
       message: 'Parcel added successfully',
