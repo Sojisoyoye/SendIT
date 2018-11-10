@@ -17,6 +17,7 @@ router.get('/api/v1/users/:id', parcelController.getAllSpecificUserParcels);
 
 // create parcel
 router.post('/api/v1/parcels', parcelController.createParcel);
+
 // get a specific parcel
 router.get('/api/v1/parcels/:id', parcelController.getSpecificParcel);
 
