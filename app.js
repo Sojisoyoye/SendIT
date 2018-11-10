@@ -1,9 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-// import router from './routes/index';
-
-// import db from './db/db';
-// import db1 from './db/db1';
+import router from './routes/index';
 
 // Set up the express app
 const app = express();
@@ -14,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // to use router
 app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(router);
+app.use(router);
 
 const PORT = 5000;
 
