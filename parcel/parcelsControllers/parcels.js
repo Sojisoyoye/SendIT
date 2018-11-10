@@ -1,5 +1,4 @@
 /* eslint-disable class-methods-use-this */
-/* eslint consistent-return: "error" */
 import db from '../db/db';
 import db1 from '../db/db1';
 
