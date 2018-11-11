@@ -1,7 +1,7 @@
 const parcels = [
   {
-    id: '01',
-    userid: 1,
+    id: 1,
+    userid: 'user1',
     sendername: 'Sola Benson',
     receivername: 'Joh Doe',
     pickuplocation: 'Yaba',
@@ -11,8 +11,8 @@ const parcels = [
     price: '$2.0',
   },
   {
-    id: '02',
-    userid: 1,
+    id: 2,
+    userid: 'user2',
     sendername: 'Sola Benson',
     receivername: 'Ade Olu',
     pickuplocation: 'Gbagada',
