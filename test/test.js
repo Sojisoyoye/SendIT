@@ -18,5 +18,15 @@ describe('Parcels', () => {
           done();
         });
     });
+
+    it('should get all parcels by all users', (done) => {
+      chai.request(app)
+        .get('/api/v1/users')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
   });
 });
