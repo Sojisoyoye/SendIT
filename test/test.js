@@ -32,14 +32,47 @@ describe('Parcels', () => {
     });
   });
 
+  describe('Get Specific User Parcel', () => {
+    it('should get a specific user parcels', (done) => {
+      const id = 1;
+      chai.request(app)
+        .get(`/api/v1/users/${id}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+        });
+    });
+
+    it('should not get a specific user parcels', (done) => {
+      const id = 5;
+      chai.request(app)
+        .get(`/api/v1/users/${id}`)
+        .end((err, res) => {
+          res.should.have.status(404);
+          done();
+        });
+    });
+  });
+
   describe('Get Specific Parcel', () => {
     it('should get a specific parcel', (done) => {
       const id = 1;
       chai.request(app)
-        .get('/api/v1/parcels/${id}')
+        .get(`/api/v1/parcels/${id}`)
         .end((err, res) => {
-          // res.should.have.status(200);
+          res.should.have.status(200);
           res.body.should.be.a('object');
+          done();
+        });
+    });
+
+    it('should not get a specific parcel', (done) => {
+      const id = 5;
+      chai.request(app)
+        .get(`/api/v1/parcels/${id}`)
+        .end((err, res) => {
+          res.should.have.status(404);
           done();
         });
     });
@@ -74,5 +107,28 @@ describe('Parcels', () => {
           done();
         });
     });
+  });
+});
+
+describe('Delete a Parcel', () => {
+  it('should cancel a parcel', (done) => {
+    const parcel = {
+      id: 1,
+      userid: 'user1',
+      sendername: 'Sola Benson',
+      receivername: 'Joh Doe',
+      pickuplocation: 'Yaba',
+      destination: 'Lekki',
+      packagecontent: 'Document',
+      weight: '1.5kg',
+      price: '$2.0',
+    };
+    chai.request(app)
+      .delete(`/api/v1/parcels/${parcel.id}`)
+      .end((err, res) => {
+        res.should.have.status(200);
+        res.body.should.be.a('object');
+        done();
+      });
   });
 });
