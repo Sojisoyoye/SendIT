@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // import dependencies for testing
 import chai from 'chai';
 import chaiHttp from 'chai-http';

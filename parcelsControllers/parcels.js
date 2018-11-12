@@ -1,4 +1,6 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 import db from '../db/db';
 import db1 from '../db/db1';
 
