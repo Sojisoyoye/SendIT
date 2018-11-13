@@ -24,7 +24,4 @@ router.get('/api/v1/parcels/:id', parcelController.getSpecificParcel);
 // cancel a specific parcel
 router.delete('/api/v1/parcels/:id', parcelController.cancelParcel);
 
-// update a specific parcel
-router.put('/api/v1/parcels/:id', parcelController.updateParcel);
-
 export default router;

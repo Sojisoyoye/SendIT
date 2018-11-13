@@ -1,15 +1,15 @@
 /* eslint-disable class-methods-use-this */
 /* eslint-disable array-callback-return */
 /* eslint-disable consistent-return */
-import db from '../db/db';
-import db1 from '../db/db1';
+import parcels from '../db/db';
+import users from '../db/db1';
 
 class ParcelsController {
   getAllParcels(req, res) {
     return res.status(200).send({
       success: 'true',
       message: 'Parcels retrieved successfully',
-      parcels: db,
+      parcels,
     });
   }
 
@@ -17,41 +17,33 @@ class ParcelsController {
     return res.status(200).send({
       success: 'true',
       message: 'users parcels retreived successfully',
-      parcels: db1,
+      parcels: users,
     });
   }
 
   getAllSpecificUserParcels(req, res) {
-    const id = parseInt(req.params.id, 10);
-    db1.map((user) => {
-      if (user.id === id) {
-        return res.status(200).send({
-          success: 'true',
-          message: 'user parcels retrieved successfully',
-          user,
-        });
-      }
-    });
-    return res.status(404).send({
-      success: 'false',
-      message: 'user does not exist',
+    const findUser = users.find(user => user.id === parseInt(req.params.id, 10));
+    if (findUser) {
+      return res.status(200).json({
+        User: findUser,
+        message: 'A single user parcels',
+      });
+    }
+    return res.status(404).json({
+      message: 'user record not found',
     });
   }
 
   getSpecificParcel(req, res) {
-    const id = parseInt(req.params.id, 10);
-    db.map((parcel) => {
-      if (parcel.id === id) {
-        return res.status(200).send({
-          success: 'true',
-          message: 'Parcel retrieved successfully',
-          parcel,
-        });
-      }
-    });
-    return res.status(404).send({
-      success: 'false',
-      message: 'Parcel does not exist',
+    const findParcel = parcels.find(parcel => parcel.id === parseInt(req.params.id, 10));
+    if (findParcel) {
+      return res.status(200).json({
+        Parcel: findParcel,
+        message: 'A single Parcel',
+      });
+    }
+    return res.status(404).json({
+      message: 'parcel record not found',
     });
   }
 
@@ -99,7 +91,7 @@ class ParcelsController {
     }
 
     const parcel = {
-      id: db.length + 1,
+      id: parcels.length + 1,
       userid: req.body.userid,
       sendername: req.body.sendername,
       receivername: req.body.receivername,
@@ -109,7 +101,7 @@ class ParcelsController {
       weight: req.body.weight,
       price: req.body.price,
     };
-    db.push(parcel);
+    parcels.push(parcel);
     return res.status(201).send({
       success: 'true',
       message: 'parcel added successfully',
@@ -118,98 +110,15 @@ class ParcelsController {
   }
 
   cancelParcel(req, res) {
-    const id = parseInt(req.params.id, 10);
-    db.map((parcel, index) => {
-      if (parcel.id === id) {
-        db.splice(index, 1);
-        return res.status(200).send({
-          success: 'true',
-          message: 'Parcel deleted successfuly',
-        });
-      }
-    });
-    return res.status(404).send({
-      success: 'false',
-      message: 'Parcel not found',
-    });
-  }
-
-  updateParcel(req, res) {
-    const id = parseInt(req.params.id, 10);
-    let parcelFound;
-    let itemIndex;
-    db.map((parcel, index) => {
-      if (parcel.id === id) {
-        parcelFound = parcel;
-        itemIndex = index;
-      }
-    });
-
-    if (!parcelFound) {
-      return res.status(404).send({
-        success: 'false',
-        message: 'parcel not found',
+    const findParcel = parcels.find(parcel => parcel.id === parseInt(req.params.id, 10));
+    if (findParcel) {
+      parcels.splice(findParcel, 1);
+      return res.status(200).json({
+        message: 'Parcel canceled successfully',
       });
     }
-    if (!req.body.userid) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'userid is required',
-      });
-    } if (!req.body.sendername) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'sendername is required',
-      });
-    } if (!req.body.receivername) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'receivername is required',
-      });
-    } if (!req.body.pickuplocation) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'pickuplocation is required',
-      });
-    } if (!req.body.destination) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'destination is required',
-      });
-    } if (!req.body.packagecontent) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'packagecontent is required',
-      });
-    } if (!req.body.weight) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'weight is required',
-      });
-    } if (!req.body.price) {
-      return res.status(400).send({
-        success: 'false',
-        message: 'price is required',
-      });
-    }
-
-    const updatedParcel = {
-      id: parcelFound.id,
-      userid: req.body.userid || parcelFound.userid,
-      sendername: req.body.sendername || parcelFound.sendername,
-      receivername: req.body.receivername || parcelFound.receivername,
-      pickuplocation: req.body.pickuplocation || parcelFound.pickuplocation,
-      destination: req.body.destination || parcelFound.destination,
-      packagecontent: req.body.packagecontent || parcelFound.packagecontent,
-      weight: req.body.weight || parcelFound.weight,
-      price: req.body.price || parcelFound.price,
-    };
-
-    db.splice(itemIndex, 1, updatedParcel);
-    return res.status(201).send({
-      success: 'true',
-      message: 'Parcel added successfully',
-      updatedParcel,
+    return res.status(404).json({
+      message: 'parcel record not found',
     });
   }
 }
