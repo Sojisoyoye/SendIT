@@ -5,7 +5,7 @@ SendIT is a courier service that helps users deliver parcels to different destin
 
 [![Coverage Status](https://coveralls.io/repos/github/Sojisoyoye/SendIT/badge.svg?branch=create-api-endpoints)](https://coveralls.io/github/Sojisoyoye/SendIT?branch=create-api-endpoints)
 
-**Application Features**
+# Application Features
 >- Users can create an account and log in
 >- Users can create a parcel delivery order
 >- Users can change the destination of a parcel delivery order
@@ -14,14 +14,35 @@ SendIT is a courier service that helps users deliver parcels to different destin
 >- Admin can see the details of a delivery order
 >- Admin can change the *status* and *present location* of a parcel delivery order
 
-**Technologies Used**
+# Technologies Used
 >- NodeJs
 >- ExpressJs
 >- HTML & CSS 
 
-**Testing Framework**
+# Testing Framework
 >- Mocha and Chai
 >- **To Test**
-    `npm run test`
 
-**How to Install**
+ `npm run test`
+
+# How to Install
+>- Install NodeJs and ExpressJs
+>- Clone the git repository
+
+`git clone https://github.com/Sojisoyoye/SendIT.git`
+
+>- Change to the project directory
+
+`cd SendIT`
+
+>- Install all required dependencies
+
+`npm install`
+
+>- Start the application
+
+`npm run start`
+
+# Author
+
+**Soji Soyoye**
