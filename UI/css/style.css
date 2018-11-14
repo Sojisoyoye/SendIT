@@ -148,6 +148,27 @@ body {
     opacity: 1;
 }
 
+.button_quote {
+    height: 50px;
+    background: #0288d1;
+    border: 0;
+    padding: 0 20px 0 20px;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    opacity: 0.8;
+    border-radius: 2px;
+    position: relative;
+    margin: -20px -50px; 
+    width:100px; 
+    top:50%; 
+    left:50%;
+}
+
+.button_quote:hover {
+    opacity: 1.2;
+}
+
 /* HEADER */
 
 header {
@@ -338,6 +359,11 @@ header nav ul li a {
     line-height: 100px;
     text-align: center;
     color: #111;
+}
+
+.index-quote .button_quote {
+    text-align: center;
+    position: center;
 }
 
 /* boxes */
