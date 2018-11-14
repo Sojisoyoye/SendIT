@@ -3,7 +3,7 @@ SendIT is a courier service that helps users deliver parcels to different destin
 
 [![Build Status](https://travis-ci.org/Sojisoyoye/SendIT.svg?branch=create-api-endpoints)](https://travis-ci.org/Sojisoyoye/SendIT)
 
-[![Coverage Status](https://coveralls.io/repos/github/Sojisoyoye/SendIT/badge.svg?branch=create-api-endpoints)](https://coveralls.io/github/Sojisoyoye/SendIT?branch=create-api-endpoints)
+[![Coverage Status](https://coveralls.io/repos/github/Sojisoyoye/SendIT/badge.svg?branch=develop)](https://coveralls.io/github/Sojisoyoye/SendIT?branch=develop)
 
 # Application Features
 >- Users can create an account and log in
