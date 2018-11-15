@@ -1,8 +1,6 @@
 import express from 'express';
 import parcelController from '../parcelsControllers/parcels';
-
-// import db from '../db/db';
-// import db1 from '../db/db1';
+import isValid from '../middleware/validations';
 
 const router = express.Router();
 
@@ -16,7 +14,7 @@ router.get('/api/v1/users', parcelController.getAllUsersParcels);
 router.get('/api/v1/users/:id', parcelController.getAllSpecificUserParcels);
 
 // create parcel
-router.post('/api/v1/parcels', parcelController.createParcel);
+router.post('/api/v1/parcels', isValid, parcelController.createParcel);
 
 // get a specific parcel
 router.get('/api/v1/parcels/:id', parcelController.getSpecificParcel);
