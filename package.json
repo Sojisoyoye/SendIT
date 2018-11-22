@@ -5,8 +5,9 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc mocha --require babel-register test/*.js --exit",
-    "start": "node_modules/.bin/nodemon app.js --exec babel-node --",
+    "start": "babel-node app.js ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "start:dev": "nodemon --exec babel-node app.js",
     "create": "node ./services/db createTables"
   },
   "author": "",
