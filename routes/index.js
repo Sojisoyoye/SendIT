@@ -23,9 +23,9 @@ router.put('/api/v1/parcels/:id', Auth.verifyToken, Parcel.update);
 
 router.delete('/api/v1/parcels/:id', Auth.verifyToken, Parcel.delete);
 
-router.post('api/v1/users', User.create);
+router.post('/api/v1/users', User.create);
 
-router.post('api/v1/users/login', User.login);
+router.post('/api/v1/users/login', User.login);
 
 // get all parcels by all users
 // router.get('/api/v1/users', parcelController.getAllUsersParcels);

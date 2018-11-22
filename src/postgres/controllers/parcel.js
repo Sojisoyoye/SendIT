@@ -4,12 +4,12 @@ import db from '../db';
 const Parcel = {
   async create(req, res) {
     const text = `INSERT INTO
-        parcels(userid, from, destination, currentlocation, status, weight, senton, deliveredon)
+        parcels(userid, pickuplocation, destination, currentlocation, status, weight, senton, deliveredon)
         VALUES($1, $2, $3, $4, $5, $6, $7, $8)
         returning *`;
     const values = [
       req.user.id,
-      req.body.from,
+      req.body.pickuplocation,
       req.body.destination,
       req.body.currentlocation,
       req.body.status,
@@ -54,7 +54,7 @@ const Parcel = {
   async update(req, res) {
     const findOneQuery = 'SELECT * FROM parcels WHERE id=$1 AND userid = $2';
     const updateOneQuery = `UPDATE parcels 
-        SET from=$2,destination=$3,currentlocation=$4,status=$5,weight=$6,senton=$7,deliverdon=$8
+        SET pickuplocation=$2,destination=$3,currentlocation=$4,status=$5,weight=$6,senton=$7,deliverdon=$8
         WHERE id=$5 AND userid = $6 returning *`;
     try {
       const { rows } = await db.query(findOneQuery, [req.params.id, req.user.id]);
@@ -62,7 +62,7 @@ const Parcel = {
         return res.status(404).send({ message: 'parcel not found' });
       }
       const values = [
-        req.body.from || rows[0].from,
+        req.body.pickuplocation || rows[0].pickuplocation,
         req.body.destination || rows[0].destination,
         req.body.currentlocation || rows[0].currentlocation,
         req.body.status || rows[0].status,

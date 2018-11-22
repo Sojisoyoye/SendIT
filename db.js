@@ -13,16 +13,16 @@ pool.on('connect', () => {
 
 const createParcelTable = () => {
   const parcelTable = `CREATE TABLE IF NOT EXISTS
-    parcels(
+     parcels(
         id SERIAL PRIMARY KEY,
-        userid UUID NOT NULL,
+        userid SERIAL,
         pickuplocation VARCHAR(128) NOT NULL,
         destination VARCHAR(128) NOT NULL,
         currentlocation VARCHAR(128) NOT NULL,
         status VARCHAR(128) NOT NULL,
         weight VARCHAR(128) NOT NULL,
-        senton TIMESTAMP,
-        deliveredon TIMESTAMP,
+        senton TIMESTAMP DEFAULT NOW(),
+        deliveredon TIMESTAMP DEFAULT NOW(),
         FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE
     )`;
 
@@ -41,14 +41,15 @@ const createParcelTable = () => {
 const createUserTable = () => {
   const userTable = `CREATE TABLE IF NOT EXISTS
     users(
-        id UUID PRIMARY KEY,
+        id SERIAL,
         firstname VARCHAR(128) NOT NULL,
         lastname VARCHAR(128) NOT NULL,
         email VARCHAR(128) UNIQUE NOT NULL,
         phone VARCHAR(128) NOT NULL,
         password VARCHAR(128) NOT NULL,
-        registered TIMESTAMP,
-        isadmin BOOLEAN 
+        registered TIMESTAMP DEFAULT NOW(),
+        isadmin BOOLEAN DEFAULT 'false',
+        PRIMARY KEY (id)
     )`;
 
   pool.query(userTable)
