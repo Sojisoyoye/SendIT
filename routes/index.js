@@ -13,6 +13,14 @@ dotenv.config();
 const router = express.Router();
 
 
+router.get('/', (req, res, next) => {
+  return res.status(200).json({ message: 'Welcome to SendIT' });
+});
+
+router.get('/api/v1', (req, res, next) => {
+  return res.status(200).json({ message: 'Welcome to Version 1 of API' });
+});
+
 router.get('/api/v1/parcels', Auth.verifyToken, Parcel.getAll);
 
 router.post('/api/v1/parcels', Auth.verifyToken, isValid, Parcel.create);
