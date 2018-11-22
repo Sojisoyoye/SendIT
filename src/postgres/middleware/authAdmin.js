@@ -1,20 +1,18 @@
 import jwt from 'jsonwebtoken';
 import db from '../db';
 
-const Auth = {
-  async verifyToken(req, res, next) {
+const authAdmin = {
+  async verifyAdmin(req, res, next) {
     const token = req.headers['x-access-token'];
-    if (!token) {
-      return res.status(400).send({ message: 'Token is not provided' });
-    }
     try {
       const decoded = await jwt.verify(token, process.env.SECRET);
       const text = 'SELECT * FROM users WHERE id = $1';
       const { rows } = await db.query(text, [decoded.userId]);
-      if (!rows[0]) {
-        return res.status(400).send({ message: 'The token provided is invalid' });
+      if (!rows[0].isadmin) {
+        return res.status(403).json({
+          message: 'access denied! You are not authorized to access this content'
+        });
       }
-      req.user = { id: decoded.userId, isadmin: decoded.isadmin };
       next();
     } catch (error) {
       return res.status(400).send(error);
@@ -22,4 +20,4 @@ const Auth = {
   },
 };
 
-export default Auth;
+export default authAdmin;
