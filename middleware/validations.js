@@ -3,24 +3,20 @@ const Validator = require('validatorjs');
 const isValid = (req, res, next) => {
   const parcel = {
     userid: req.body.userid,
-    sendername: req.body.sendername,
-    receivername: req.body.receivername,
     pickuplocation: req.body.pickuplocation,
     destination: req.body.destination,
-    packagecontent: req.body.packagecontent,
+    currentlocation: req.body.currentlocation,
+    status: req.body.status,
     weight: req.body.weight,
-    price: req.body.price,
   };
 
   const rules = {
     userid: 'alpha_num',
-    sendername: 'alpha',
-    receivername: 'alpha',
-    pickuplocation: 'alpha',
-    destination: 'alpha',
-    packagecontent: 'alpha',
+    pickuplocation: 'required|alpha',
+    destination: 'required|alpha',
+    currentlocation: 'alpha',
+    status: 'alpha',
     weight: 'alpha_num',
-    price: 'alpha_num',
   };
 
   const myValidation = new Validator(parcel, rules);
@@ -28,11 +24,7 @@ const isValid = (req, res, next) => {
     console.log(myValidation.passes);
     return next();
   }
-  return res.send('invalid input');
+  return res.send('please enter valid inputs');
 };
 
 export default isValid;
-
-
-// myValidation.passes();
-// myValidation.fails();
