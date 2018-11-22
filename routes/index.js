@@ -1,7 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import 'babel-polyfill';
-// import parcelController from '../parcelsControllers/parcels';
 import Parcel from '../src/postgres/controllers/parcel';
 import User from '../src/postgres/controllers/user';
 import isValid from '../middleware/validations';
@@ -34,10 +33,5 @@ router.post('/api/v1/users', User.create);
 
 router.post('/api/v1/users/login', User.login);
 
-// get all parcels by all users
-// router.get('/api/v1/users', parcelController.getAllUsersParcels);
-
-// get all parcel by a specific user
-// router.get('/api/v1/users/:id', parcelController.getAllSpecificUserParcels);
 
 export default router;
