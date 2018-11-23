@@ -5,10 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "nyc mocha --require babel-register test/*.js --exit",
-    "start": "babel-node app.js ",
+    "start": "npm run create && babel-node app.js ",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "start:dev": "nodemon --exec babel-node app.js",
-    "create": "node ./services/db createTables"
+    "create": "node ./db.js createAllTables"
   },
   "author": "",
   "license": "ISC",

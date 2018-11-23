@@ -2,7 +2,6 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../app';
 
-// const Parcel = require('../db/db');
 
 // configure chai
 chai.should();
@@ -14,7 +13,7 @@ describe('Parcels', () => {
       chai.request(app)
         .get('/api/v1/parcels')
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           done();
         });
@@ -80,14 +79,12 @@ describe('Parcels', () => {
   describe('Create Parcel', () => {
     it('should create a new parcel', (done) => {
       const parcel = {
-        userid: 'user1',
-        sendername: 'sean paul',
-        receivername: 'craig david',
-        pickuplocation: 'yaba',
-        destination: 'oyo',
-        packagecontent: 'letter',
-        weight: '0.5kg',
-        price: '$4',
+        userid: 'ade',
+        pickuplocation: 'london',
+        destination: 'yaba',
+        currentlocation: 'oyo',
+        status: 'placed',
+        weight: '1kg',
       };
       chai.request(app)
         .post('/api/v1/parcels')
@@ -96,13 +93,11 @@ describe('Parcels', () => {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.parcel.should.have.property('userid');
-          res.body.parcel.should.have.property('sendername');
-          res.body.parcel.should.have.property('receivername');
           res.body.parcel.should.have.property('pickuplocation');
           res.body.parcel.should.have.property('destination');
-          res.body.parcel.should.have.property('packagecontent');
+          res.body.parcel.should.have.property('currentlocation');
+          res.body.parcel.should.have.property('status');
           res.body.parcel.should.have.property('weight');
-          res.body.parcel.should.have.property('price');
           done();
         });
     });
@@ -112,15 +107,12 @@ describe('Parcels', () => {
 describe('Delete a Parcel', () => {
   it('should cancel a parcel', (done) => {
     const parcel = {
-      id: 1,
-      userid: 'user1',
-      sendername: 'Sola Benson',
-      receivername: 'Joh Doe',
-      pickuplocation: 'Yaba',
-      destination: 'Lekki',
-      packagecontent: 'Document',
-      weight: '1.5kg',
-      price: '$2.0',
+      userid: 'ade',
+      pickuplocation: 'london',
+      destination: 'yaba',
+      currentlocation: 'oyo',
+      status: 'placed',
+      weight: '1kg',
     };
     chai.request(app)
       .delete(`/api/v1/parcels/${parcel.id}`)

@@ -6,7 +6,7 @@ const SignUpValid = (req, res, next) => {
     lastname: req.body.lastname,
     email: req.body.email,
     phone: req.body.phone,
-    password: req.body.passwprd,
+    password: req.body.password,
     isadmin: req.body.isadmin,
   };
 
@@ -14,7 +14,7 @@ const SignUpValid = (req, res, next) => {
     firstname: 'required|alpha',
     lastname: 'required|alpha',
     email: 'required|email',
-    phone: 'required|integer',
+    phone: 'required|digits:12',
     password: 'required',
     isadmin: 'required|boolean',
   };
