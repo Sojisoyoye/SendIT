@@ -14,7 +14,7 @@ const SignUpValid = (req, res, next) => {
     firstname: 'required|alpha',
     lastname: 'required|alpha',
     email: 'required|email',
-    phone: 'required|digits:12',
+    phone: 'required|alpha_num',
     password: 'required',
     isadmin: 'required|boolean',
   };
