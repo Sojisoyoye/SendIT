@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL
 });
 
 pool.on('connect', () => {
@@ -26,7 +26,8 @@ const createParcelTable = () => {
         FOREIGN KEY (userid) REFERENCES users (id) ON DELETE CASCADE
     )`;
 
-  pool.query(parcelTable)
+  pool
+    .query(parcelTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -36,7 +37,6 @@ const createParcelTable = () => {
       pool.end();
     });
 };
-
 
 const createUserTable = () => {
   const userTable = `CREATE TABLE IF NOT EXISTS
@@ -52,7 +52,8 @@ const createUserTable = () => {
         PRIMARY KEY (id)
     )`;
 
-  pool.query(userTable)
+  pool
+    .query(userTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -63,10 +64,10 @@ const createUserTable = () => {
     });
 };
 
-
 const dropParcelTable = () => {
   const parcelTable = 'DROP TABLE IF EXISTS parcels returning *';
-  pool.query(parcelTable)
+  pool
+    .query(parcelTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -79,7 +80,8 @@ const dropParcelTable = () => {
 
 const dropUserTable = () => {
   const userTable = 'DROP TABLE IF EXISTS users returning *';
-  pool.query(userTable)
+  pool
+    .query(userTable)
     .then((res) => {
       console.log(res);
       pool.end();
@@ -89,7 +91,6 @@ const dropUserTable = () => {
       pool.end();
     });
 };
-
 
 const createAllTables = () => {
   createUserTable();
@@ -112,7 +113,7 @@ module.exports = {
   createAllTables,
   dropUserTable,
   dropParcelTable,
-  dropAllTables,
+  dropAllTables
 };
 
 require('make-runnable');
