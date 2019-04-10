@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import router from './routes/index';
+import router from './server/routes/index';
 
 // Set up the express app
 const app = express();
@@ -10,7 +10,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // to use router
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(router);
 
 const PORT = process.env.PORT || 5000;
