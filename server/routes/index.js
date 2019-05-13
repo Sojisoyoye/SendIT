@@ -1,7 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import 'babel-polyfill';
-// import Parcel from '../src/postgres/controllers/parcel';
+import ParcelController from '../controllers/parcel';
 import UserController from '../controllers/user';
 // import isValid from '../middleware/validations';
 // import signUpValid from '../middleware/signupvalidator';
@@ -19,9 +19,9 @@ router.get('/', (req, res) => res.status(200).json({ message: 'Welcome to SendIT
 
 router.get('/api/v1', (req, res) => res.status(200).json({ message: 'Welcome to Version 1 of API' }));
 
-// router.get('/api/v1/parcels', Auth.verifyToken, Parcel.getAll);
+router.get('/api/v1/parcels', ParcelController.getAll);
 
-// router.post('/api/v1/parcels', Auth.verifyToken, isValid, Parcel.create);
+router.post('/api/v1/parcels', ParcelController.create);
 
 // router.get('/api/v1/parcels/:id', Auth.verifyToken, Parcel.getOne);
 

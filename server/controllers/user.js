@@ -3,10 +3,10 @@ import Helper from '../helper/helper';
 
 const { User } = models;
 
-const handleError = (err, res, code, value, Emsg, Umsg) => {
+ const handleError = (err, res, code, value, Emsg, Umsg) => {
   const { errors } = err;
-  const errResult = errors.filter(obj => obj.path === value)[0];
-  if (errResult) {
+   const errResult = errors.filter(obj => obj.path === value)[0];
+   if (errResult) {
     res.status(code).json({
       status: code,
       message: Emsg
@@ -17,7 +17,7 @@ const handleError = (err, res, code, value, Emsg, Umsg) => {
       message: Umsg
     });
   }
-};
+ };
 
 const handleResponse = (res, code, msg) => {
   res.status(code).json({
@@ -50,7 +50,10 @@ const UserController = {
       });
     } catch (err) {
       handleError(err, res, '406', 'email', 'Email already in use', 'Username already in use');
-    }
+     // return res.status(406).json({
+       // status: 406,
+       // message: 'In use'
+      }
   },
 
   async login(req, res) {
